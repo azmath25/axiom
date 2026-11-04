@@ -1,0 +1,13 @@
+{
+  "name": "axiom-math-studio",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A command-first mathematics AI chat workspace — frontend-only prototype",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check src/app.js && node --check src/plot.js && node --check src/commands.js && node --check src/mimo-contract.js && node --test tests/*.test.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
