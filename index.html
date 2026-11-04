@@ -49,15 +49,15 @@
       <button class="sidebar-search" id="openPaletteSidebar"><svg><use href="#ic-search"/></svg><span>Search or command</span><kbd>⌘ K</kbd></button>
       <div class="sidebar-section-label"><span>YOUR SPACE</span><span class="section-tick"></span></div>
       <nav class="space-nav">
-        <button class="space-nav-item active" id="navChats"><svg><use href="#ic-grid"/></svg> All explorations <span id="chatCount" class="nav-count">0</span></button>
+        <button class="space-nav-item active" id="navChats"><svg><use href="#ic-grid"/></svg> Chats <span id="chatCount" class="nav-count">0</span></button>
         <button class="space-nav-item" id="navStarred"><svg><use href="#ic-star"/></svg> Starred <span id="starCount" class="nav-count">0</span></button>
-        <button class="space-nav-item" id="navArtifacts"><svg><use href="#ic-file"/></svg> Artifacts <span class="tiny-badge">NEW</span></button>
+        <button class="space-nav-item" id="navArtifacts"><svg><use href="#ic-file"/></svg> Artifacts <span class="tiny-badge">3</span></button>
       </nav>
       <div class="sidebar-section-label history-label"><span>RECENT WORK</span><button class="mini-action" id="clearHistory" title="Clear all local history">Clear</button></div>
       <div class="history-list" id="historyList" aria-label="Recent conversations"></div>
       <div class="sidebar-bottom">
         <div class="workspace-card"><div class="workspace-card-top"><span class="alive-point"></span> STUDIO STATUS</div><div class="workspace-card-main">Local design mode <span class="demo-pill">DEMO</span></div><p>No AI requests or private keys are sent. Preview commands safely.</p><div class="workspace-card-meter"><span></span></div></div>
-        <div class="account-row"><div class="account-avatar">A</div><div><strong>Personal workspace</strong><small>Frontend concept · v0.1</small></div><button class="icon-btn" id="openSettings" aria-label="Open settings"><svg><use href="#ic-settings"/></svg></button></div>
+        <div class="account-row"><div class="account-avatar">A</div><div><strong>Personal workspace</strong><small>Frontend concept · v0.2</small></div><button class="icon-btn" id="openSettings" aria-label="Open settings"><svg><use href="#ic-settings"/></svg></button></div>
       </div>
     </div>
   </aside>
@@ -65,7 +65,7 @@
   <div class="center-column">
     <header class="topbar">
       <div class="topbar-left"><button class="icon-btn mobile-menu" id="openSidebar" aria-label="Open navigation"><svg><use href="#ic-menu"/></svg></button><span class="breadcrumb-root">WORKSPACE</span><svg class="breadcrumb-chevron"><use href="#ic-chevron"/></svg><span class="breadcrumb-current" id="chatHeading">New exploration</span></div>
-      <div class="topbar-right"><div class="online-state"><i></i> LOCAL MODE</div><button class="icon-btn" id="themeToggle" title="Toggle color scheme" aria-label="Toggle color scheme"><svg><use href="#ic-sun"/></svg></button><button class="icon-btn" id="openPaletteHeader" title="Command palette" aria-label="Open command palette"><svg><use href="#ic-terminal"/></svg></button><button class="workspace-toggle" id="toggleInspector"><svg><use href="#ic-grid"/></svg><span>Workspace</span></button></div>
+      <div class="topbar-right"><div class="online-state"><i></i> LOCAL MODE</div><button class="icon-btn" id="themeToggle" title="Toggle color scheme" aria-label="Toggle color scheme"><svg><use href="#ic-sun"/></svg></button><button class="icon-btn" id="openPaletteHeader" title="Command palette" aria-label="Open command palette"><svg><use href="#ic-terminal"/></svg></button><button class="workspace-toggle" id="toggleInspector"><svg><use href="#ic-grid"/></svg><span>Preview</span></button></div>
     </header>
 
     <main class="main-panel" id="mainPanel">
@@ -76,7 +76,7 @@
           <div class="composer-shell">
             <div class="composer-top"><span class="composer-label"><svg><use href="#ic-spark"/></svg> MATH COPILOT</span><span class="composer-state"><span class="state-dot"></span> Sandbox-ready</span></div>
             <div class="composer-input-row"><textarea id="promptInput" rows="2" aria-label="Message or math command" placeholder="Ask anything mathematical, or type / for commands…" spellcheck="false"></textarea></div>
-            <div class="composer-bottom"><div class="composer-tools"><button class="composer-tool primary-tool" id="slashButton" title="Browse commands"><svg><use href="#ic-terminal"/></svg> Commands</button><button class="composer-tool" id="attachButton" title="Select a local file for future API upload"><svg><use href="#ic-plus"/></svg> Attach</button><input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp,application/pdf,text/plain,.tex" hidden><span class="attachment-chip" id="attachmentChip" hidden></span></div><div class="send-group"><span class="send-hint">↵ Send</span><button class="send-btn" id="sendButton" aria-label="Send message"><svg><use href="#ic-send"/></svg></button></div></div>
+            <div class="composer-bottom"><div class="composer-tools"><button class="composer-tool primary-tool" id="slashButton" title="Browse commands"><svg><use href="#ic-terminal"/></svg> Commands</button><button class="composer-tool" id="attachButton" title="Select a local attachment (not uploaded)"><svg><use href="#ic-plus"/></svg> Attach</button><input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp,application/pdf,text/plain,.tex" hidden><span class="attachment-chip" id="attachmentChip" hidden></span></div><div class="send-group"><span class="send-hint">↵ Send</span><button class="send-btn" id="sendButton" aria-label="Send message"><svg><use href="#ic-send"/></svg></button></div></div>
           </div>
           <div class="composer-under"><span><kbd>/</kbd> commands <span class="dot-sep">·</span> <kbd>⌘ K</kbd> palette</span><span>Designed for thought. Built for tools.</span></div>
         </div>
@@ -85,12 +85,12 @@
   </div>
 
   <aside class="inspector" id="inspector" aria-label="Artifact workspace">
-    <div class="inspector-header"><div><span class="eyebrow">THE WORKBENCH</span><h2>Live artifacts <span class="artifact-count">03</span></h2></div><button class="icon-btn inspector-close" id="inspectorClose" aria-label="Close workspace"><svg><use href="#ic-close"/></svg></button></div>
-    <div class="inspector-tabs" role="tablist" aria-label="Artifact types"><button data-inspector-tab="graph" class="active" role="tab" aria-selected="true"><svg><use href="#ic-graph"/></svg> Graph</button><button data-inspector-tab="tikz" role="tab" aria-selected="false"><span class="tikz-mark">T</span> TikZ</button><button data-inspector-tab="request" role="tab" aria-selected="false"><svg><use href="#ic-terminal"/></svg> API</button></div>
+    <div class="inspector-header"><div><span class="eyebrow">THE WORKBENCH</span><h2>Quick previews <span class="artifact-count">03</span></h2></div><button class="icon-btn inspector-close" id="inspectorClose" aria-label="Close workspace"><svg><use href="#ic-close"/></svg></button></div>
+    <div class="inspector-tabs" role="tablist" aria-label="Artifact types"><button data-inspector-tab="graph" class="active" role="tab" aria-selected="true"><svg><use href="#ic-graph"/></svg> Graph</button><button data-inspector-tab="tikz" role="tab" aria-selected="false"><span class="tikz-mark">T</span> TikZ</button><button data-inspector-tab="notebook" role="tab" aria-selected="false"><svg><use href="#ic-terminal"/></svg> Notes</button></div>
     <div class="inspector-body">
       <section class="inspector-view" data-view="graph">
         <div class="artifact-meta"><span class="artifact-type"><i></i> INTERACTIVE PLOT</span><span class="artifact-counter">01 / 03</span></div>
-        <div class="artifact-title-row"><h3>Function explorer</h3><button class="icon-btn" id="resetGraph" title="Reset the graph" aria-label="Reset graph"><svg><use href="#ic-swap"/></svg></button></div>
+        <a class="artifact-page-link" href="graph.html" id="openFullGraph">Full-page graph ↗</a><div class="artifact-title-row"><h3>Function explorer</h3><button class="icon-btn" id="resetGraph" title="Reset the graph" aria-label="Reset graph"><svg><use href="#ic-swap"/></svg></button></div>
         <p class="artifact-note">Plot a mathematical expression entirely in your browser.</p>
         <div class="graph-card"><svg id="plotSvg" class="plot-svg" viewBox="0 0 480 370" role="img" aria-label="Interactive function plot"></svg><div class="plot-hud"><span id="plotCoord">x 0.00 · y 0.00</span><span class="plot-color-dot"></span></div></div>
         <label class="small-label" for="graphExpression">EXPRESSION</label>
@@ -100,7 +100,7 @@
       </section>
       <section class="inspector-view" data-view="tikz" hidden>
         <div class="artifact-meta"><span class="artifact-type"><i></i> VECTOR DRAFT</span><span class="artifact-counter">02 / 03</span></div>
-        <div class="artifact-title-row"><h3>TikZ atelier</h3><span class="tech-tag">.tex</span></div>
+        <a class="artifact-page-link" href="tikz.html" id="openFullTikz">Full-page TikZ ↗</a><div class="artifact-title-row"><h3>TikZ atelier</h3><span class="tech-tag">.tex</span></div>
         <p class="artifact-note">Editable source and an illustrative diagram. Compilation is reserved for the backend.</p>
         <label class="small-label" for="tikzPreset">DIAGRAM TEMPLATE</label><select id="tikzPreset" class="artifact-select"><option value="triangle">Geometry · triangle</option><option value="circle">Geometry · unit circle</option><option value="axes">Graph · coordinate axes</option></select>
         <div class="tikz-preview" id="tikzPreview" aria-label="Illustrative TikZ diagram preview"></div>
@@ -108,14 +108,15 @@
         <textarea id="tikzCode" class="code-editor" rows="10" aria-label="TikZ source"></textarea>
         <div class="graph-actions"><span class="muted-mini">LaTeX source is editable</span><div><button class="text-action" id="copyTikz"><svg><use href="#ic-copy"/></svg> Copy</button><button class="text-action" id="downloadTikz"><svg><use href="#ic-download"/></svg> .tex</button></div></div>
       </section>
-      <section class="inspector-view" data-view="request" hidden>
-        <div class="artifact-meta"><span class="artifact-type"><i></i> PROTOCOL READY</span><span class="artifact-counter">03 / 03</span></div><div class="artifact-title-row"><h3>Mimo request inspector</h3><span class="tech-tag">v1</span></div><p class="artifact-note">Inspect the proposed browser-to-proxy payload. No browser-held project keys or network calls.</p>
-        <div class="request-path"><span>POST</span><code>/api/chat/runs</code></div><div class="code-head"><span>LAST COMMAND PAYLOAD</span><button class="text-action" id="copyRequest"><svg><use href="#ic-copy"/></svg> Copy JSON</button></div><pre class="request-json" id="requestJson"></pre>
-        <div class="request-steps"><div><b>01</b><span>Frontend command</span><strong>Local preview</strong></div><div><b>02</b><span>Your server proxy</span><strong>Not connected</strong></div><div><b>03</b><span>Mimo workflow run</span><strong>Future</strong></div></div>
-        <div class="inspector-tip security-tip"><svg><use href="#ic-info"/></svg><span>Mimo project API keys belong on your server, not in this frontend repository.</span></div>
+      <section class="inspector-view" data-view="notebook" hidden>
+        <div class="artifact-meta"><span class="artifact-type"><i></i> LOCAL NOTES</span><span class="artifact-counter">03 / 03</span></div>
+        <div class="artifact-title-row"><h3>Math notebook</h3><span class="tech-tag">OFFLINE</span></div>
+        <p class="artifact-note">Keep formulas, ideas and intermediate steps in your browser. Edit everything in the full notebook.</p>
+        <div id="notebookPeek" class="notebook-peek"></div>
+        <a class="artifact-page-link" href="notebook.html">Open full notebook ↗</a>
       </section>
     </div>
-    <div class="inspector-footer"><div class="footer-orbit"><span class="orbit-mark">✳</span></div><div><strong>Ideas → Instruments</strong><small>Your mathematics, beautifully organized.</small></div><span class="build-id">V0.1</span></div>
+    <div class="inspector-footer"><a class="artifact-page-link" href="artifacts.html">All artifacts ↗</a><div class="footer-orbit"><span class="orbit-mark">✳</span></div><div><strong>Ideas → Instruments</strong><small>Your mathematics, beautifully organized.</small></div><span class="build-id">V0.2</span></div>
   </aside>
 </div>
 

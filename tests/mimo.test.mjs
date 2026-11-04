@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { WORKFLOW_MAP,makePreviewRequest,toMimoServerRequest,normalizeRun } from "../src/mimo-contract.js";
+import { WORKFLOW_MAP,LOCAL_COMMANDS,makePreviewRequest,toMimoServerRequest,normalizeRun } from "../src/mimo-contract.js";
 test("client request is a safe no-network preview",()=>{
  const c=makePreviewRequest({command:"tikz",input:"triangle",threadId:"t1",clientRequestId:"req-1",attachmentName:"figure.png"});
  assert.equal(c.method,"POST");assert.equal(c.url,"/api/chat/runs");assert.equal(c.status,"preview_only");
@@ -20,4 +20,15 @@ test("normalizing Mimo run statuses never assumes a request is complete",()=>{
  assert.equal(normalizeRun({id:"abc",status:"queued"}).done,false);
  assert.equal(normalizeRun({id:"abc",status:"completed",output:{ok:true}}).done,true);
  assert.equal(normalizeRun({id:"abc",status:"failed"}).done,true);
+});
+
+test("graph and notebook stay fully browser-side and cannot be converted to Mimo runs",()=>{
+ for(const cmd of LOCAL_COMMANDS){
+  const local=makePreviewRequest({command:cmd,input:"x^2",threadId:"c1"});
+  assert.equal(local.status,"local_only");
+  assert.equal(local.method,"LOCAL");
+  assert.equal(local.url,null);
+  assert.throws(()=>toMimoServerRequest(local),/must not be sent/);
+  assert.equal(WORKFLOW_MAP[cmd],undefined);
+ }
 });

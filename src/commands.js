@@ -11,6 +11,7 @@ export const COMMANDS = Object.freeze([
   {id:"extract",label:"Extract",glyph:"↗",description:"Plan document-to-math transcription",hint:"/extract Convert this question to LaTeX",group:"Produce",placeholder:"Describe the document…"},
   {id:"simplify",label:"Simplify",glyph:"≈",description:"Reduce a symbolic expression",hint:"/simplify (x^2-1)/(x-1)",group:"Mathematics",placeholder:"(x^2-1)/(x-1)"},
   {id:"analyze",label:"Analyze",glyph:"∂",description:"Explore assumptions and edge cases",hint:"/analyze continuity of f(x)",group:"Mathematics",placeholder:"Your mathematical question…"},
+  {id:"note",label:"Note",glyph:"✎",description:"Save a thought to the local Math Notebook",hint:"/note Remember to check the boundary case",group:"Organize",placeholder:"Write a formula, idea, or note…"},
   {id:"code",label:"Code",glyph:"</>",description:"Generate or review mathematical code",hint:"/code fast Fourier transform in Python",group:"Produce",placeholder:"Describe your algorithm…"}
 ]);
 export function getCommand(id){return COMMANDS.find(x=>x.id===id)||null;}

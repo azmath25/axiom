@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" data-theme="dark"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e17"><meta name="description" content="Axiom local math workspace — Graph Explorer">
+<title>Graph Explorer · Axiom Mathematics Studio</title><link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/workspace.css"><script type="module" src="src/artifact-pages.js"></script></head>
+<body data-artifact-page="graph">
+<header class="work-nav"><a class="wordmark" href="index.html"><span class="mark">✳</span> axiom<span class="wordmark-period">.</span></a>
+<nav aria-label="Main navigation"><a href="index.html">Chat</a><a href="artifacts.html" >Artifacts</a><a href="graph.html" aria-current="page">Graph</a><a href="tikz.html" >TikZ</a><a href="notebook.html" >Notebook</a></nav>
+<button id="themeSwitcher" class="quiet icon-theme" type="button" title="Toggle theme" aria-label="Toggle theme">◐</button></header>
+<main class="work-main"><section class="work-hero"><div class="eyebrow"><i></i>01 / INTERACTIVE MATHEMATICS</div><h1>See how functions<br><em>behave.</em></h1><p>Same local graph engine as the chat preview. Change an expression, zoom, inspect coordinates, or export a vector graphic.</p></section>
+<section class="tool-grid graph-page-grid"><div class="work-card plot-work-card">
+<div class="card-heading"><span>THE CANVAS</span><span class="online-indicator"><i></i>LOCAL RENDERER</span></div>
+<div class="big-graph"><svg id="fullPlot" viewBox="0 0 480 370" role="img" aria-label="Interactive mathematical function graph"></svg><div id="fullCoords" class="coords-chip">Move cursor to inspect x, y</div></div>
+<div class="canvas-bottom"><div class="zoom-group"><button id="zoomLess" type="button" aria-label="Zoom out">−</button><span id="zoomPercent">100%</span><button id="zoomMore" type="button" aria-label="Zoom in">+</button></div><button class="quiet" id="resetGraph" type="button">Reset view</button></div>
+</div><aside class="work-card graph-controls"><div class="card-heading"><span>FUNCTION INPUT</span><span>01 / TOOL</span></div>
+<h2>Draw your equation</h2><p class="control-hint">The plot updates locally. No account, cloud backend or AI tokens needed.</p>
+<label for="fullExpr">Function y =</label><div class="wide-input"><span>y =</span><input id="fullExpr" spellcheck="false" autocomplete="off" value="sin(x) + 0.25*cos(3*x)"></div>
+<div class="button-row"><button class="primary" type="button" id="plotNow">Plot function</button><button class="quiet" type="button" id="exportGraph">Export SVG ↗</button></div>
+<p id="graphError" class="field-error" role="alert" hidden></p>
+<div class="divider"></div><h3>Try an expression</h3><div class="preset-chips"><button type="button" data-expression="sin(x) + 0.25*cos(3*x)">sin(x) + 0.25cos(3x)</button><button type="button" data-expression="x^2/4 - 2">Quadratic</button><button type="button" data-expression="exp(-x^2/8)*cos(3*x)">Damped wave</button><button type="button" data-expression="sin(x)/x">Sinc</button></div>
+<div class="hint-card">Uses a safe mathematical expression parser, not JavaScript evaluation. Supports sin, cos, tan, sqrt, ln, log, exp, abs and arithmetic.</div>
+<div class="divider"></div><a href="index.html" class="go-back">← Back to chat</a>
+</aside></section>
+</main><footer class="work-footer"><span>AXIOM / PERSONAL MATHEMATICS STUDIO</span><span>LOCAL BROWSER TOOLS · NO SERVER REQUIRED</span></footer>
+<div id="workToast" class="work-toast" role="status" aria-live="polite" hidden></div>
+</body></html>

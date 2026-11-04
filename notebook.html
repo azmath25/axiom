@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-theme="dark"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e17"><meta name="description" content="Axiom local math workspace — Math Notebook">
+<title>Math Notebook · Axiom Mathematics Studio</title><link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/workspace.css"><script type="module" src="src/artifact-pages.js"></script></head>
+<body data-artifact-page="notebook">
+<header class="work-nav"><a class="wordmark" href="index.html"><span class="mark">✳</span> axiom<span class="wordmark-period">.</span></a>
+<nav aria-label="Main navigation"><a href="index.html">Chat</a><a href="artifacts.html" >Artifacts</a><a href="graph.html" >Graph</a><a href="tikz.html" >TikZ</a><a href="notebook.html" aria-current="page">Notebook</a></nav>
+<button id="themeSwitcher" class="quiet icon-theme" type="button" title="Toggle theme" aria-label="Toggle theme">◐</button></header>
+<main class="work-main"><section class="work-hero"><div class="eyebrow"><i></i>03 / PERSONAL RESEARCH NOTES</div><h1>Keep the ideas<br><em>worth revisiting.</em></h1><p>A simple, private notebook for calculations, formulas, definitions and open questions. Notes are stored only in this browser.</p></section>
+<section class="notebook-workspace"><aside class="work-card note-list-area">
+<div class="card-heading"><span>YOUR ENTRIES</span><span id="noteCount">0 NOTES</span></div>
+<button type="button" id="createNote" class="primary new-note">+ New note</button>
+<label for="noteSearch" class="sr-only">Search notes</label><input type="search" id="noteSearch" placeholder="Search your notes…" autocomplete="off">
+<div id="noteList" class="note-list" aria-label="Saved notes"></div>
+<button type="button" class="quiet export-all" id="exportNotes">Export all notes JSON ↗</button>
+</aside><section class="work-card note-editor-area"><div class="card-heading"><span>NOTE EDITOR</span><span id="noteSavedLabel">LOCAL ONLY</span></div>
+<div id="noteEmpty" class="note-empty"><span>✎</span><h2>Your research starts here.</h2><p>Select a note, or create one to save your next idea.</p><button class="primary" type="button" id="emptyCreate">Create your first note</button></div>
+<div id="noteEditor" hidden><label for="noteTitle">Title</label><input id="noteTitle" class="note-title" maxlength="120" placeholder="An interesting observation…">
+<label for="noteBody">Content</label><textarea id="noteBody" class="note-body" spellcheck="false" placeholder="Write a theorem, proof sketch, LaTeX expression, or question…"></textarea>
+<div class="note-editor-footer"><span id="noteTimestamp">Saved locally</span><div class="button-row"><button id="downloadNote" type="button" class="quiet">Export .md</button><button id="deleteNote" type="button" class="danger">Delete</button></div></div></div>
+</section></section><p class="work-footnote">Use <code>/note Your observation</code> in the chat to save notes here. Notes are not synchronized to Mimo or any cloud service.</p>
+</main><footer class="work-footer"><span>AXIOM / PERSONAL MATHEMATICS STUDIO</span><span>LOCAL BROWSER TOOLS · NO SERVER REQUIRED</span></footer>
+<div id="workToast" class="work-toast" role="status" aria-live="polite" hidden></div>
+</body></html>

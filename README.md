@@ -2,11 +2,11 @@
 
 **An independent, frontend-only mathematics chatbot interface.** A polished static single-page application designed around specialized slash commands, mathematical visualizations, and a future Mimo backend proxy.
 
-> **Status: v0.1 design prototype.** No actual AI inference, TikZ compilation, document upload, or Mimo run execution occurs. All commands except the offline function plotter and narrow linear-equation demonstration show **clearly labeled request previews**.
+> **Status: v0.2 design prototype.** No actual AI inference, TikZ compilation, document upload, or Mimo run execution occurs. The graph, Math Notebook, and narrow linear-equation demonstration execute locally; other commands show **clearly labeled request previews** until a trusted Mimo proxy is connected. TikZ source editing is local and its illustrated template preview is not compiled.
 
-![Axiom desktop workspace](docs/desktop-preview.png)
+**Axiom v0.2:** Chat, Artifacts, Graph, TikZ and Notebook.
 
-[Phone layout](docs/phone-preview.png) · [Interactive chat and graph](docs/chat-preview.png) · [Design decisions](docs/DESIGN_DECISIONS.md)
+[Earlier desktop preview](docs/desktop-preview.png) · [Design decisions](docs/DESIGN_DECISIONS.md)
 
 ## Get started
 
@@ -17,7 +17,7 @@ python3 -m http.server 4173
 # Open http://localhost:4173
 ```
 
-To publish as **your own new GitHub repository** once reviewed:
+To publish as **your own new GitHub repository** once reviewed (from the ZIP, which does not include `.git`):
 
 ```bash
 git init -b main
@@ -26,7 +26,7 @@ git commit -m "Initial Axiom frontend"
 gh repo create axiom-math-studio --private --source=. --remote=origin --push
 ```
 
-The project is not associated with the existing Quizer or Mimo repositories. The GitHub creation/publishing action has not been executed here.
+The project is not associated with the existing Quizer or Mimo repositories. Publishing it on GitHub is a separate step: GitHub repository creation was unavailable to the connected tools in this session. A Git bundle is supplied separately if you want to retain the complete local commit history.
 
 To run tests (Node 20+):
 
@@ -37,13 +37,14 @@ npm run check
 
 ## Features
 
-- **Three-pane desktop workspace:** conversation history, central chat and right-side mathematical artifacts. Responsive side drawer and inspector on mobile.
-- **12 mathematical commands:** `/solve`, `/graph`, `/tikz`, `/prove`, `/verify`, `/explain`, `/latex`, `/quiz`, `/extract`, `/simplify`, `/analyze`, `/code`.
+- **Distraction-reduced chat:** conversation history and focused chat. An optional slide-out inspector offers quick tool previews, and each tool also has its own spacious HTML page.
+- **13 mathematical commands:** `/solve`, `/graph`, `/tikz`, `/prove`, `/verify`, `/explain`, `/latex`, `/quiz`, `/extract`, `/simplify`, `/analyze`, `/note`, `/code`.
 - **⌘/Ctrl+K palette:** searchable tools and actions, arrow-key navigation, Enter to select, Escape to close. ⌘/Ctrl+J opens a new conversation. Type `/` in the composer for suggestions.
+- **Three independent tool pages and an artifact gallery:** browser-only `graph.html`, `tikz.html`, `notebook.html`, plus `artifacts.html`. Inline chat previews have links to the same tools.
 - **Interactive SVG function graphing:** safe expression parser (no `eval`), trigonometric/polynomial functions, zoom, cursor coordinate readout and SVG export.
 - **TikZ atelier:** realistic standalone LaTeX templates for geometry and axes, editable source, copy and `.tex` download. Its decorative SVG diagram is illustrative **not** the result of compiling edited source.
 - **Persistent conversations:** local browser history, star/filter, full JSON export. No cloud sync.
-- **Mimo API inspector:** previews proposed requests using command→published-workflow aliases with version, client request ID and idempotency-ready fields.
+- **Mimo-compatible internal request adapter:** prepares proposed command→published-workflow envelopes with version, client request ID and idempotency-ready fields; no API widget in the artifact gallery.
 - **Theme switching, reduced-motion support, keyboard navigation, touch-friendly components, accessible labels.**
 
 ## Mimo architecture and security
@@ -66,10 +67,17 @@ Mimo API source: `azmath25/mimo-backend/docs/EXTERNAL_API_V2.md`. The current wo
 
 ```text
 axiom-math-studio/
-├── index.html               Accessible workspace markup
+├── index.html               Chat and optional inline quick previews
+├── artifacts.html           Artifact gallery with saved previews
+├── graph.html               Full-page browser-side interactive grapher
+├── tikz.html                Full-page TikZ source editor
+├── notebook.html            Full-page persistent Math Notebook
 ├── favicon.svg              Brand mark
 ├── src/
-│   ├── styles.css           Responsive visual design
+│   ├── styles.css           Chat and responsive visual design
+│   ├── workspace.css        Dedicated artifact page design
+│   ├── artifact-store.js    Shared local artifact state
+│   ├── artifact-pages.js    Full-page graph/TikZ/notebook controllers
 │   ├── app.js               Chat, dialogs, history and UI events
 │   ├── commands.js          Declarative command catalog and parser
 │   ├── plot.js              Safe numeric expression plotter
@@ -80,6 +88,13 @@ axiom-math-studio/
     ├── MIMO_INTEGRATION.md
     └── desktop-preview.png
 ```
+
+## v0.2 — dual-view artifact workspace
+
+- **Inside chat:** each `/graph` and `/tikz` response contains a compact preview and a *Quick view* button that opens the associated inspector tool without leaving chat. `/note` creates a local entry and links to it.
+- **On dedicated pages:** `artifacts.html` displays the saved tool gallery, `graph.html` provides a full graph canvas, `tikz.html` provides a spacious LaTeX editor, and `notebook.html` provides searchable editable notes.
+- **Shared state:** graph expression/zoom, TikZ source/preset, and notes are kept in same-origin browser storage. Opening the current TikZ preset preserves edits. The graph renderer, zoom, and SVG export do not require a separate backend or paid API.
+- **Boundaries:** TikZ diagrams are illustrative local templates, not compiled previews; general mathematics and AI commands remain explicitly labeled request previews.
 
 ## Next phase (not implemented)
 
@@ -94,3 +109,25 @@ Connect user authentication and a trusted server proxy, create published Mimo wo
 - Google Fonts are optional; system font fallbacks work when offline.
 
 MIT-style prototype: you're free to adapt this repository for your own project.
+
+## GitHub Pages deployment
+
+This repository includes a frontend-only GitHub Actions workflow in `.github/workflows/pages.yml`.
+On **each push to `main`**, the workflow verifies JavaScript and all 12 source/unit tests,
+creates a clean `dist/` containing only the five pages, `src/`, the favicon and `.nojekyll`,
+then publishes that output to GitHub Pages. It does not run a Node server in production,
+use a database, or call Quizer/Mimo services.
+
+**First-time setup in a new repository:**
+
+1. Create a **new** repository named `axiom-math-studio` in the `azmath25` GitHub account. To let a GitHub-connected assistant upload the files, initialize it with a README so the `main` branch exists.
+2. Share the new repository URL with your GitHub-connected assistant to upload the files. Alternatively, for a repository created **without** a README, you can push this local repository yourself with `git remote add origin https://github.com/azmath25/axiom.git && git push -u origin main` using an authenticated GitHub client.
+3. In GitHub, open **Settings → Pages → Build and deployment → Source → GitHub Actions**.
+4. Open **Actions → Build, verify and deploy Axiom frontend**, confirm the workflow succeeded, then open `https://azmath25.github.io/axiom/`.
+
+GitHub Pages publishes a static site and does not require a continuously running
+backend server. The browser grapher remains client-side. Only a future explicitly
+authorized Mimo integration would need a separate authenticated server-side proxy.
+
+
+**Canonical repository:** https://github.com/azmath25/axiom. Graphing and notebooks are browser-only.

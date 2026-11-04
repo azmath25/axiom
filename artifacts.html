@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" data-theme="dark"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e17"><meta name="description" content="Axiom local math workspace — Artifacts">
+<title>Artifacts · Axiom Mathematics Studio</title><link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/workspace.css"><script type="module" src="src/artifact-pages.js"></script></head>
+<body data-artifact-page="artifacts">
+<header class="work-nav"><a class="wordmark" href="index.html"><span class="mark">✳</span> axiom<span class="wordmark-period">.</span></a>
+<nav aria-label="Main navigation"><a href="index.html">Chat</a><a href="artifacts.html" aria-current="page">Artifacts</a><a href="graph.html" >Graph</a><a href="tikz.html" >TikZ</a><a href="notebook.html" >Notebook</a></nav>
+<button id="themeSwitcher" class="quiet icon-theme" type="button" title="Toggle theme" aria-label="Toggle theme">◐</button></header>
+<main class="work-main"><section class="work-hero"><div class="eyebrow"><i></i>YOUR INSTRUMENTS</div><h1>A quieter place for<br><em>good ideas.</em></h1><p>Tools live on their own pages. Open them whenever you need more space—then return to your conversation. Every artifact stays in this browser.</p></section>
+<section class="gallery-grid" aria-label="Artifact library">
+<a class="artifact-tile tile-graph" href="graph.html"><div class="tile-label"><span class="tile-number">01 / GRAPH</span><span class="tile-arrow">↗</span></div><div class="tile-visual"><svg id="galleryPlot" viewBox="0 0 480 370" aria-label="Preview of last plotted function"></svg></div><div class="tile-details"><h2>Function explorer</h2><p id="galleryGraphName">Plot, inspect, export.</p><span class="tile-link">Open graph workspace →</span></div></a>
+<a class="artifact-tile tile-tikz" href="tikz.html"><div class="tile-label"><span class="tile-number">02 / TIKZ</span><span class="tile-arrow">↗</span></div><div class="tile-visual" id="galleryTikz"></div><div class="tile-details"><h2>TikZ atelier</h2><p>Edit standalone LaTeX diagrams and export source.</p><span class="tile-link">Open vector workspace →</span></div></a>
+<a class="artifact-tile tile-notes" href="notebook.html"><div class="tile-label"><span class="tile-number">03 / NOTEBOOK</span><span class="tile-arrow">↗</span></div><div class="tile-visual note-tile-visual"><span class="notebook-mark">f(x) → ideas</span><div id="galleryNotes"></div></div><div class="tile-details"><h2>Math notebook</h2><p>Keep your formulas, conjectures and work in one place.</p><span class="tile-link">Open notebook →</span></div></a>
+</section><p class="work-footnote">All three tools run locally. The Mimo execution interface is separate from the artifact gallery and remains disconnected.</p>
+</main><footer class="work-footer"><span>AXIOM / PERSONAL MATHEMATICS STUDIO</span><span>LOCAL BROWSER TOOLS · NO SERVER REQUIRED</span></footer>
+<div id="workToast" class="work-toast" role="status" aria-live="polite" hidden></div>
+</body></html>

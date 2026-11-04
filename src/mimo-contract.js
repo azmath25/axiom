@@ -5,18 +5,24 @@
  */
 export const WORKFLOW_MAP=Object.freeze({
  chat:{workflow_id:"math_chat",version:1},solve:{workflow_id:"math_solve",version:1},
- graph:{workflow_id:"math_graph",version:1},tikz:{workflow_id:"math_tikz",version:1},
+ tikz:{workflow_id:"math_tikz",version:1},
  prove:{workflow_id:"math_prove",version:1},verify:{workflow_id:"math_verify",version:1},
  explain:{workflow_id:"math_explain",version:1},latex:{workflow_id:"math_latex",version:1},
  quiz:{workflow_id:"math_quiz",version:1},extract:{workflow_id:"math_extract",version:1},
  simplify:{workflow_id:"math_simplify",version:1},analyze:{workflow_id:"math_analyze",version:1},
  code:{workflow_id:"math_code",version:1}
 });
+export const LOCAL_COMMANDS=Object.freeze(["graph","note"]);
 const VALID_ID=/^[a-z0-9][a-z0-9_-]{0,100}$/i;
 export function newClientRequestId(){
   return typeof crypto!=="undefined"&&typeof crypto.randomUUID==="function"?crypto.randomUUID():`local-${Date.now()}-${Math.random().toString(36).slice(2,10)}`;
 }
 export function makePreviewRequest({command="chat",input="",threadId="new",attachmentName=null,clientRequestId="local-preview"}={}){
+  if (LOCAL_COMMANDS.includes(command)) return {
+    method: "LOCAL", url: null, status: "local_only",
+    body: { command, input: { text: String(input) }, session_id: String(threadId), client_request_id: String(clientRequestId) },
+    note: "Runs entirely in the browser. Do not dispatch a Mimo workflow or bill for graphing/notebook edits."
+  };
   const route=WORKFLOW_MAP[command]||WORKFLOW_MAP.chat;
   return {
     method:"POST",
@@ -37,6 +43,8 @@ export function makePreviewRequest({command="chat",input="",threadId="new",attac
 /** A future proxy may translate a validated client request into this Mimo call. */
 export function toMimoServerRequest(preview){
   const body=preview?.body||{};
+  if (preview?.status === "local_only" || LOCAL_COMMANDS.includes(body.command))
+    throw new Error("Local browser tools must not be sent to Mimo");
   const route=WORKFLOW_MAP[body.command]||WORKFLOW_MAP.chat;
   if(!VALID_ID.test(route.workflow_id))throw new Error("Invalid server workflow identifier");
   if(typeof body.input?.text!=="string")throw new Error("Missing text input");
