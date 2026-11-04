@@ -17,16 +17,12 @@ python3 -m http.server 4173
 # Open http://localhost:4173
 ```
 
-To publish as **your own new GitHub repository** once reviewed (from the ZIP, which does not include `.git`):
+## Repository and deployment
 
-```bash
-git init -b main
-git add .
-git commit -m "Initial Axiom frontend"
-gh repo create axiom-math-studio --private --source=. --remote=origin --push
-```
-
-The project is not associated with the existing Quizer or Mimo repositories. Publishing it on GitHub is a separate step: GitHub repository creation was unavailable to the connected tools in this session. A Git bundle is supplied separately if you want to retain the complete local commit history.
+- **GitHub source:** https://github.com/azmath25/axiom
+- **Static website:** https://azmath25.github.io/axiom/
+- Axiom is independent of Quizer and Mimo. Graphing and notebook storage run entirely in the browser.
+- Pushes to `main` deploy through GitHub Actions after the source checks and build succeed.
 
 To run tests (Node 20+):
 
@@ -118,12 +114,7 @@ creates a clean `dist/` containing only the five pages, `src/`, the favicon and 
 then publishes that output to GitHub Pages. It does not run a Node server in production,
 use a database, or call Quizer/Mimo services.
 
-**First-time setup in a new repository:**
-
-1. Create a **new** repository named `axiom-math-studio` in the `azmath25` GitHub account. To let a GitHub-connected assistant upload the files, initialize it with a README so the `main` branch exists.
-2. Share the new repository URL with your GitHub-connected assistant to upload the files. Alternatively, for a repository created **without** a README, you can push this local repository yourself with `git remote add origin https://github.com/azmath25/axiom.git && git push -u origin main` using an authenticated GitHub client.
-3. In GitHub, open **Settings → Pages → Build and deployment → Source → GitHub Actions**.
-4. Open **Actions → Build, verify and deploy Axiom frontend**, confirm the workflow succeeded, then open `https://azmath25.github.io/axiom/`.
+**Deploying:** Open [GitHub Actions](https://github.com/azmath25/axiom/actions) to inspect the latest Pages build. The site is hosted at https://azmath25.github.io/axiom/. If GitHub Pages is not enabled, configure **Settings → Pages → Source → GitHub Actions**.
 
 GitHub Pages publishes a static site and does not require a continuously running
 backend server. The browser grapher remains client-side. Only a future explicitly
